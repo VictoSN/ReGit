@@ -2,8 +2,8 @@ export interface GitHubUser {
     login: string
     name: string | null
     avatar_url: string
-    bio: string | null
     html_url: string
+    bio: string | null
     followers: number
     public_repos: number
     created_at: Date
@@ -12,11 +12,13 @@ export interface GitHubUser {
 export interface GitHubRepo {
     name: string
     full_name: string
+    description: string | null
+    created_at: Date
     html_url: string
-    stargazers_count: number
-    watchers_count: number
     language: string | null
+    stargazers_count: number
     forks_count: number
+    watchers_count: number
 }
 
 
