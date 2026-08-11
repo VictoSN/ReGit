@@ -9,8 +9,8 @@ function UserCard({ user }: UserCardProps) {
     return (
         <div className="w-full flex flex-row px-20 py-5 gap-5 text-white w-">
             <div className="flex flex-col w-3/4">
-                <div className="flex flex-row">
-                    <img src={user.avatar_url} className="max-w-[64px]"/>
+                <div className="flex flex-row gap-5">
+                    <img src={user.avatar_url} className="max-w-[64px] rounded-full"/>
                     <div className="flex flex-col">
                         <p className="font-bold text-2xl">{user.login}</p>
                         <p className="text-sm font-semibold text-[#8ba2ad]">{user.name}</p>

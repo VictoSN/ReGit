@@ -18,7 +18,7 @@ function SearchBar({ query, setQuery, onSearch }: SearchBarProps) {
                 </div>
             </form>
             <a href='https://github.com/VictoSN'>
-                <img src={logoIcon} className="max-w-[40px]"/>
+                <img src={logoIcon} className="max-w-[40px] rounded-full"/>
             </a>
         </div>
     )
