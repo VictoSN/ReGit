@@ -3,7 +3,7 @@ import { getGitHubRepos, getGitHubUser } from '../api/github'
 import type {GitHubRepo, GitHubUser } from '../api/github'
 
 // One status per UI screen
-type Status = "idle" | "loading" | "notFound" | "error" | "success"
+export type Status = "idle" | "loading" | "notFound" | "error" | "success"
 
 function useGitHubUsers() {
     const [user, setUser] = useState<GitHubUser | null>(null)
