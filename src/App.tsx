@@ -10,15 +10,17 @@ function App() {
   // these states are inside the hook, being borrowed by the App.tsx
   const { user, repos, status, search } = useGitHubUsers()
   const [query, setQuery] = useState("") // Raw input from the searchbar
+  const [searchedQuery, setSearchQuery] = useState("") // Searched input that the user actually ask for
 
   const onSearch = () => {
+    setSearchQuery(query)
     search(query)
   }
 
   return (
     <div className="flex flex-col h-dvh justify-top items-center bg-black gap-2">
       <SearchBar query={query} setQuery={setQuery} onSearch={onSearch}/>
-      {status !== "success" && status !== "idle" && status !== "loading" && status && <StatusMessage status={status} query={query}/>}
+      {status !== "success" && status !== "idle" && status !== "loading" && status && <StatusMessage status={status} query={searchedQuery}/>}
 
       {/* Only shows after a successful fetch */}
       {status === "success" && user && <UserCard user={user} />}

@@ -7,7 +7,7 @@ interface UserCardProps {
 
 function UserCard({ user }: UserCardProps) {
     return (
-        <div className="w-full flex flex-row px-20 py-5 gap-5 text-white w-">
+        <div className="w-full flex flex-row px-30 py-5 gap-5 text-white w-">
             <div className="flex flex-col w-3/4">
                 <div className="flex flex-row gap-5">
                     <img src={user.avatar_url} className="max-w-[64px] rounded-full"/>

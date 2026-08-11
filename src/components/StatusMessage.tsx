@@ -4,7 +4,6 @@ interface StatusMessageProps {
 }
 
 function StatusMessage({ status, query }: StatusMessageProps) {
-
     if (status === "notFound") {
         return  <div className="flex flex-col text-center pt-60 gap-2 text-white">
                     <p className="text-lg font-bold">Hm...we couldn’t find any results for {query}</p> 
