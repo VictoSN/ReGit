@@ -16,7 +16,7 @@ function App() {
   }
 
   return (
-    <div className="flex flex-col h-dvh justify-center items-center bg-black gap-2">
+    <div className="flex flex-col h-dvh justify-top items-center bg-black gap-2">
       <SearchBar query={query} setQuery={setQuery} onSearch={onSearch}/>
       <StatusMessage status={status} />
 
