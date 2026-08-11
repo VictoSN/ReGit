@@ -6,6 +6,7 @@ export interface GitHubUser {
     html_url: string
     followers: number
     public_repos: number
+    created_at: Date
 }
 
 export interface GitHubRepo {
