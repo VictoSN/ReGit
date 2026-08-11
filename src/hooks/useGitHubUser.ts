@@ -20,7 +20,11 @@ function useGitHubUsers() {
 
             setStatus("success")
         } catch (error) {
-
+            if (error instanceof Error && error.message === "User not found") {
+                setStatus("notFound")
+            } else {
+                setStatus("error")
+            }
         }
     }
 
