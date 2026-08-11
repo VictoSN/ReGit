@@ -8,8 +8,6 @@ interface SearchBarProps {
 }
 
 function SearchBar({ query, setQuery, onSearch }: SearchBarProps) {
-
-
     return (
         <div className="flex items-center w-full text-white px-5 border-solid border-b border-gray-600">
             <h1 className="text-left font-bold text-2xl">GH-Lookup</h1>
