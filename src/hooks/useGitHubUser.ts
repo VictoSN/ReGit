@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { getGitHubRepos, getGitHubUser } from '../api/github'
 import type {GitHubRepo, GitHubUser } from '../api/github'
 
+// One status per UI screen
 type Status = "idle" | "loading" | "notFound" | "error" | "success"
 
 function useGitHubUsers() {
@@ -20,6 +21,7 @@ function useGitHubUsers() {
 
             setStatus("success")
         } catch (error) {
+            // Ensure its a known error
             if (error instanceof Error && error.message === "User not found") {
                 setStatus("notFound")
             } else {
