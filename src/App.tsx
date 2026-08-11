@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import RepoList from './components/RepoList'
 import SearchBar from './components/SearchBar'
 import StatusMessage from './components/StatusMessage'
 import UserCard from './components/UserCard'
@@ -23,8 +22,7 @@ function App() {
       {status !== "success" && status !== "idle" && status !== "loading" && status && <StatusMessage status={status} query={searchedQuery}/>}
 
       {/* Only shows after a successful fetch */}
-      {status === "success" && user && <UserCard user={user} />}
-      {/* {status === "success" && repos && <RepoList repos={repos} />} */}
+      {status === "success" && user && <UserCard user={user} repos={repos} />}
     </div>
   )
 }

@@ -1,14 +1,16 @@
 import plusIcon from '../assets/plus.svg'
-import type { GitHubUser } from "../api/github"
+import type { GitHubRepo, GitHubUser } from "../api/github"
+import RepoList from './RepoList'
 
 interface UserCardProps {
     user: GitHubUser
+    repos: GitHubRepo[]
 }
 
-function UserCard({ user }: UserCardProps) {
+function UserCard({ user, repos }: UserCardProps) {
     return (
         <div className="w-full flex flex-row px-30 py-5 gap-5 text-white w-">
-            <div className="flex flex-col w-3/4">
+            <div className="flex flex-col w-3/4 gap-10">
                 <div className="flex flex-row gap-5">
                     <img src={user.avatar_url} className="max-w-[64px] rounded-full"/>
                     <div className="flex flex-col">
@@ -17,7 +19,7 @@ function UserCard({ user }: UserCardProps) {
                     </div>
                 </div>
                 <div>
-                    {/* repo list */}
+                    <RepoList repos={repos} />
                 </div>
             </div>
 
