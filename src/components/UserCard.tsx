@@ -6,27 +6,35 @@ interface UserCardProps {
 
 function UserCard({ user }: UserCardProps) {
     return (
-        <div className="flex bg-gray-800 p-5 rounded-[10px] gap-5 text-white">
-            <div>
-                <div>
-                    <img src={user.avatar_url}/>
-                    <div>
-                        <h1>{user.login}</h1>
-                        <h2>{user.name}</h2>
+        <div className="w-full flex flex-row px-20 py-5 gap-5 text-white w-">
+            <div className="flex flex-col w-3/4">
+                <div className="flex flex-row">
+                    <img src={user.avatar_url} className="max-w-[64px]"/>
+                    <div className="flex flex-col">
+                        <p className="font-bold text-2xl">{user.login}</p>
+                        <p className="text-sm font-semibold text-[#8ba2ad]">{user.name}</p>
                     </div>
                 </div>
                 <div>
-
+                    {/* repo list */}
                 </div>
             </div>
-            <div>
 
-            </div>
-            <p>{user.bio}</p>
-            <a href={user.html_url}>Visit Here!</a>
-            <div>
-                <p>Followers: {user.followers}</p>
-                <p>Public Repository: {user.public_repos}</p>
+
+            <div className="flex flex-col w-1/4 gap-3">
+                <p className="font-bold text-xl">{user.login}</p>
+                <a href={user.html_url} className="w-fit bg-white px-5 py-0.5 text-black rounded-3xl">Follow</a>
+                <p>{user.bio}</p>
+                <div className="flex flex-row gap-10">
+                    <div>
+                        <p className="text-sm">{user.followers}</p>
+                        <p className="text-xs text-[#8ba2ad]">Followers</p>
+                    </div>
+                    <div>
+                        <p className="text-sm">{user.public_repos}</p>
+                        <p className="text-xs text-[#8ba2ad]">Public Repository</p>
+                    </div>
+                </div>
             </div>
         </div>
     )
