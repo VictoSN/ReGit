@@ -20,7 +20,7 @@ function App() {
   return (
     <div className="flex flex-col h-dvh justify-top items-center bg-black gap-2">
       <SearchBar query={query} setQuery={setQuery} onSearch={onSearch} inputRef={inputRef} />
-      {status !== "success" && status !== "idle" && status !== "loading" && status && <StatusMessage status={status} query={searchedQuery} inputRef={inputRef} />}
+      {status !== "success" && status !== "loading" && status && <StatusMessage status={status} query={searchedQuery} inputRef={inputRef} />}
 
       {/* Only shows after a successful fetch */}
       {status === "success" && user && <UserCard user={user} repos={repos} />}
