@@ -18,7 +18,7 @@ function App() {
   }
 
   return (
-    <div className="flex flex-col h-dvh justify-top items-center bg-[#0e1113] gap-4">
+    <div className="flex flex-col min-h-dvh justify-top items-center bg-[#0e1113] pb-4 gap-4">
       <SearchBar query={query} setQuery={setQuery} onSearch={onSearch} inputRef={inputRef} />
       {status !== "success" && status !== "loading" && status && <StatusMessage status={status} query={searchedQuery} inputRef={inputRef} />}
 
