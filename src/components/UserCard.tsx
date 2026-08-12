@@ -24,7 +24,7 @@ function UserCard({ user, repos }: UserCardProps) {
             </div>
 
 
-            <div className="flex flex-col w-1/4 gap-4 p-4 bg-black rounded-2xl">
+            <div className="flex flex-col w-1/4 gap-4 p-4 bg-black rounded-2xl h-fit">
                 <p className="font-bold text-base">{user.login}</p>
                 <div className="relative">
                     <img src={plusIcon} className="max-w-[16px] absolute left-2 top-1/2 -translate-y-1/2"/>
