@@ -6,6 +6,33 @@ interface RepoListProps {
 }
 
 function RepoList({ user, repos }: RepoListProps) {
+    const languageColors: Record<string, string> = {
+        JavaScript: "#f1e05a",
+        TypeScript: "#3178c6",
+        Python: "#3572A5",
+        HTML: "#e34c26",
+        CSS: "#663399",
+        Java: "#b07219",
+        "C#": "#178600",
+        "C++": "#f34b7d",
+        C: "#555555",
+        Go: "#00ADD8",
+        Rust: "#dea584",
+        PHP: "#4F5D95",
+        Ruby: "#701516",
+        Swift: "#F05138",
+        Kotlin: "#A97BFF",
+        Shell: "#89e051",
+        Vue: "#41b883",
+        JSON: "#292929",
+        Markdown: "#083fa1",
+        "Jupyter Notebook": "#DA5B0B",
+    }
+
+    function getLanguageColor(lang: string): string {
+        return languageColors[lang] ?? "#8b949e"
+    }
+
     return (
         <div className="flex flex-col gap-5 text-white">
             {
@@ -22,9 +49,12 @@ function RepoList({ user, repos }: RepoListProps) {
                         <p className="text-[#8ba2ad] text-sm">{repo.description}</p>
 
                         <div className="flex flex-row items-center gap-3 text-xs">
-                            <div className="flex flex-row items-center gap-1 bg-[#2a3236] px-3 py-2 rounded-3xl">
-                                <p>{repo.language}</p>
-                            </div>
+                            {repo.language && (
+                                <div className="flex flex-row items-center gap-1 bg-[#2a3236] px-3 py-2 rounded-3xl">
+                                    <span className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: getLanguageColor(repo.language) }} />
+                                    <p>{repo.language}</p>
+                                </div>
+                            )}
 
                             <div className="flex flex-row items-center gap-1 bg-[#2a3236] px-3 py-2 rounded-3xl">
                                 <svg viewBox="0 0 16 16" width="16" height="16" fill="currentColor"><path d="M8 .25a.75.75 0 0 1 .673.418l1.882 3.815 4.21.612a.75.75 0 0 1 .416 1.279l-3.046 2.97.719 4.192a.751.751 0 0 1-1.088.791L8 12.347l-3.766 1.98a.75.75 0 0 1-1.088-.79l.72-4.194L.818 6.374a.75.75 0 0 1 .416-1.28l4.21-.611L7.327.668A.75.75 0 0 1 8 .25Zm0 2.445L6.615 5.5a.75.75 0 0 1-.564.41l-3.097.45 2.24 2.184a.75.75 0 0 1 .216.664l-.528 3.084 2.769-1.456a.75.75 0 0 1 .698 0l2.77 1.456-.53-3.084a.75.75 0 0 1 .216-.664l2.24-2.183-3.096-.45a.75.75 0 0 1-.564-.41L8 2.694Z"/></svg>
