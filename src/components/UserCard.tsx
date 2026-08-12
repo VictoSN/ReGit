@@ -9,9 +9,9 @@ interface UserCardProps {
 
 function UserCard({ user, repos }: UserCardProps) {
     return (
-        <div className="w-full flex flex-row px-30 py-5 gap-5 text-white w-">
+        <div className="w-full flex flex-row px-30 gap-5 text-white">
             <div className="flex flex-col w-3/4 gap-10">
-                <div className="flex flex-row gap-5">
+                <div className="flex flex-row gap-5 p-4">
                     <img src={user.avatar_url} className="max-w-[64px] rounded-full"/>
                     <div className="flex flex-col">
                         <p className="font-bold text-2xl">{user.login}</p>
@@ -19,19 +19,19 @@ function UserCard({ user, repos }: UserCardProps) {
                     </div>
                 </div>
                 <div>
-                    <RepoList repos={repos} />
+                    <RepoList user={user} repos={repos} />
                 </div>
             </div>
 
 
-            <div className="flex flex-col w-1/4 gap-4">
-                <p className="font-bold text-xl">{user.login}</p>
+            <div className="flex flex-col w-1/4 gap-4 p-4 bg-black rounded-2xl">
+                <p className="font-bold text-base">{user.login}</p>
                 <div className="relative">
                     <img src={plusIcon} className="max-w-[16px] absolute left-2 top-1/2 -translate-y-1/2"/>
                     <a href={user.html_url} target="_blank" rel="noopener noreferrer" className="w-fit bg-white pl-8 pr-3 py-1 text-black rounded-3xl">Follow</a>
                 </div>
                 <p className='text-[#8ba2ad]'>{user.bio}</p>
-                <div className="grid grid-cols-2 gap-5">
+                <div className="grid grid-cols-2 gap-5 pt-4 border-solid border-t border-gray-800">
                     <div>
                         <p className="text-sm">{user.followers}</p>
                         <p className="text-xs text-[#8ba2ad]">Followers</p>

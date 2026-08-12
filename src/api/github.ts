@@ -11,7 +11,6 @@ export interface GitHubUser {
 
 export interface GitHubRepo {
     name: string
-    full_name: string
     description: string | null
     created_at: Date
     html_url: string

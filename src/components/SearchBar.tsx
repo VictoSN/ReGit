@@ -10,7 +10,7 @@ interface SearchBarProps {
 
 function SearchBar({ query, setQuery, onSearch, inputRef }: SearchBarProps) {
     return (
-        <div className="flex items-center w-full text-white px-5 border-solid border-b border-gray-600">
+        <div className="flex items-center w-full text-white px-5 border-solid border-b border-gray-700">
             <h1 className="text-left font-bold text-2xl">GH-Lookup</h1>
             <form className="flex mx-auto py-2 gap-5" onSubmit={(e) => {e.preventDefault(); onSearch() }}>
                 <div className='relative'>
@@ -18,7 +18,7 @@ function SearchBar({ query, setQuery, onSearch, inputRef }: SearchBarProps) {
                     <input ref={inputRef} value={query} onChange={(e) => setQuery(e.target.value)} className="border border-orange-500 rounded-[30px] h-[40px] w-[560px] pl-10" placeholder="Find Anything"></input>
                 </div>
             </form>
-            <a href='https://github.com/VictoSN'>
+            <a href='https://github.com/VictoSN' target="_blank" rel="noopener noreferrer">
                 <img src={logoIcon} className="max-w-[40px] rounded-full"/>
             </a>
         </div>
