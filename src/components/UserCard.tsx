@@ -1,13 +1,15 @@
 import plusIcon from '../assets/plus.svg'
-import type { GitHubRepo, GitHubUser } from "../api/github"
+import type { GitHubRepo, GitHubStar, GitHubUser } from "../api/github"
 import RepoList from './RepoList'
+import StarredList from './StarredList'
 
 interface UserCardProps {
     user: GitHubUser
     repos: GitHubRepo[]
+    stars: GitHubStar[]
 }
 
-function UserCard({ user, repos }: UserCardProps) {
+function UserCard({ user, repos, stars }: UserCardProps) {
     return (
         <div className="w-full flex flex-row px-30 gap-5 text-white">
             <div className="flex flex-col w-3/4 gap-5">
@@ -47,6 +49,11 @@ function UserCard({ user, repos }: UserCardProps) {
                         <p className="text-sm">{new Date(user.created_at).toLocaleDateString()}</p>
                         <p className="text-xs text-[#8ba2ad]">Created at</p>
                     </div>
+                </div>
+
+                <div className="flex pt-4 border-solid border-t border-gray-800">
+                    <p className='text-xs font-semibold text-[#8ba2ad]'>STARRED REPOSITORIES</p>
+                    <StarredList stars={stars} />
                 </div>
             </div>
         </div>

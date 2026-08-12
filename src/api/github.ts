@@ -20,6 +20,12 @@ export interface GitHubRepo {
     watchers_count: number
 }
 
+export interface GitHubStar{
+    full_name: string
+    owner: GitHubUser
+    html_url: string
+    stargazers_count: number
+}
 
 export async function getGitHubUser(username: string): Promise<GitHubUser> {
     const res = await fetch("https://api.github.com/users/" + username)
@@ -30,6 +36,12 @@ export async function getGitHubUser(username: string): Promise<GitHubUser> {
 
 export async function getGitHubRepos(username: string): Promise<GitHubRepo[]> {
     const res = await fetch("https://api.github.com/users/" + username + "/repos")
+    if (!res.ok) throw new Error("GitHub API error")
+    return await res.json()
+}
+
+export async function getGitHubStars(username: string): Promise<GitHubStar[]> {
+    const res = await fetch("https://api.github.com/users/" + username + "/starred")
     if (!res.ok) throw new Error("GitHub API error")
     return await res.json()
 }

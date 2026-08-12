@@ -7,7 +7,7 @@ import useGitHubUsers from './hooks/useGitHubUser'
 
 function App() {
   // these states are inside the hook, being borrowed by the App.tsx
-  const { user, repos, status, search } = useGitHubUsers()
+  const { user, repos, stars, status, search } = useGitHubUsers()
   const [query, setQuery] = useState("") // Raw input from the searchbar
   const [searchedQuery, setSearchQuery] = useState("") // Searched input that the user actually ask for
   const inputRef = useRef<HTMLInputElement>(null) // Used useRef to store address of DOM
@@ -23,7 +23,7 @@ function App() {
       {status !== "success" && status !== "loading" && status && <StatusMessage status={status} query={searchedQuery} inputRef={inputRef} />}
 
       {/* Only shows after a successful fetch */}
-      {status === "success" && user && <UserCard user={user} repos={repos} />}
+      {status === "success" && user && <UserCard user={user} repos={repos} stars={stars} />}
     </div>
   )
 }
