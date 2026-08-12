@@ -10,7 +10,7 @@ interface UserCardProps {
 function UserCard({ user, repos }: UserCardProps) {
     return (
         <div className="w-full flex flex-row px-30 gap-5 text-white">
-            <div className="flex flex-col w-3/4 gap-10">
+            <div className="flex flex-col w-3/4 gap-5">
                 <div className="flex flex-row gap-5 p-4">
                     <img src={user.avatar_url} className="max-w-[64px] rounded-full"/>
                     <div className="flex flex-col">
@@ -19,6 +19,9 @@ function UserCard({ user, repos }: UserCardProps) {
                     </div>
                 </div>
                 <div>
+                    <div className='pb-4'>
+                        <p className='px-4 py-2 bg-[#3d494e] w-fit rounded-3xl font-semibold'>Repositories</p>
+                    </div>
                     <RepoList user={user} repos={repos} />
                 </div>
             </div>
