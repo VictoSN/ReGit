@@ -39,7 +39,7 @@ function RepoList({ repos }: RepoListProps) {
                     <div key={repo.name} className="flex flex-col border-solid border-t pt-3 pl-4 border-gray-700 gap-2">
                         <div className="flex flex-row gap-2 items-center">
                             <img src={repo.owner.avatar_url} className="max-w-[24px] rounded-full"/>
-                            <p className="text-sm">{repo.owner.name}</p>
+                            <p className="text-sm">{repo.owner.login}</p>
                             <p className="text-[#8ba2ad] text-xs">•</p>
                             <p className="text-[#8ba2ad] text-xs">{new Date(repo.created_at).toLocaleDateString()}</p>
                         </div>

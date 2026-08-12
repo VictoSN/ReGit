@@ -11,8 +11,8 @@ interface UserCardProps {
 
 function UserCard({ user, repos, stars }: UserCardProps) {
     return (
-        <div className="w-full flex flex-row px-30 gap-5 text-white">
-            <div className="flex flex-col w-3/4 gap-5">
+        <div className="w-[1120px] flex flex-row gap-5 text-white">
+            <div className="flex flex-col w-7/10 gap-5">
                 <div className="flex flex-row gap-5 p-4">
                     <img src={user.avatar_url} className="max-w-[64px] rounded-full"/>
                     <div className="flex flex-col">
@@ -29,7 +29,7 @@ function UserCard({ user, repos, stars }: UserCardProps) {
             </div>
 
 
-            <div className="flex flex-col w-1/4 gap-4 p-4 bg-black rounded-2xl h-fit">
+            <div className="flex flex-col w-3/10 gap-4 p-4 bg-black rounded-2xl h-fit">
                 <p className="font-bold text-base">{user.login}</p>
                 <div className="relative">
                     <img src={plusIcon} className="max-w-[16px] absolute left-2 top-1/2 -translate-y-1/2"/>
@@ -51,7 +51,7 @@ function UserCard({ user, repos, stars }: UserCardProps) {
                     </div>
                 </div>
 
-                <div className="flex pt-4 border-solid border-t border-gray-800">
+                <div className="flex flex-col pt-4 border-solid border-t border-gray-800 gap-4">
                     <p className='text-xs font-semibold text-[#8ba2ad]'>STARRED REPOSITORIES</p>
                     <StarredList stars={stars} />
                 </div>
