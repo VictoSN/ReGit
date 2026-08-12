@@ -10,6 +10,7 @@ export interface GitHubUser {
 }
 
 export interface GitHubRepo {
+    owner: GitHubUser
     name: string
     description: string | null
     created_at: Date

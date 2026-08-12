@@ -24,7 +24,7 @@ function UserCard({ user, repos, stars }: UserCardProps) {
                     <div className='pb-4'>
                         <p className='px-4 py-2 bg-[#3d494e] w-fit rounded-3xl font-semibold'>Repositories</p>
                     </div>
-                    <RepoList user={user} repos={repos} />
+                    <RepoList repos={repos} />
                 </div>
             </div>
 

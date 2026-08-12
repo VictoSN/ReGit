@@ -1,11 +1,10 @@
-import type { GitHubRepo, GitHubUser } from "../api/github"
+import type { GitHubRepo } from "../api/github"
 
 interface RepoListProps {
-    user: GitHubUser
     repos: GitHubRepo[]
 }
 
-function RepoList({ user, repos }: RepoListProps) {
+function RepoList({ repos }: RepoListProps) {
     const languageColors: Record<string, string> = {
         JavaScript: "#f1e05a",
         TypeScript: "#3178c6",
@@ -39,8 +38,8 @@ function RepoList({ user, repos }: RepoListProps) {
                 repos.map((repo) => (
                     <div key={repo.name} className="flex flex-col border-solid border-t pt-3 pl-4 border-gray-700 gap-2">
                         <div className="flex flex-row gap-2 items-center">
-                            <img src={user.avatar_url} className="max-w-[24px] rounded-full"/>
-                            <p className="text-sm">{user.name}</p>
+                            <img src={repo.owner.avatar_url} className="max-w-[24px] rounded-full"/>
+                            <p className="text-sm">{repo.owner.name}</p>
                             <p className="text-[#8ba2ad] text-xs">•</p>
                             <p className="text-[#8ba2ad] text-xs">{new Date(repo.created_at).toLocaleDateString()}</p>
                         </div>
