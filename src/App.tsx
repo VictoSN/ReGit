@@ -13,6 +13,7 @@ function App() {
   const inputRef = useRef<HTMLInputElement>(null) // Used useRef to store address of DOM
 
   const onSearch = () => {
+    if (!query.trim()) return // ensure to only search when there is a valid query
     setSearchQuery(query)
     search(query)
   }
