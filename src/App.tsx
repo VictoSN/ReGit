@@ -44,7 +44,7 @@ function App() {
 
       {/* Home Page */}
       {(status === "idle") &&
-        (failed ? <p className='text-[#8ba2ad] text-sm'>Couldn't load popular repos. Check your connection or try again in a few minutes</p> : 
+        (failed ? <StatusMessage status={status} query={searchedQuery} inputRef={inputRef} /> : 
           <TwoColumnLayout 
             left={<RecommendedCard repos={popularRepos} openUser={openUser} />}
             right={<PopularCard forks={forkedRepos} />}
