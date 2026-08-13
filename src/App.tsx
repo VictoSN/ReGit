@@ -4,6 +4,8 @@ import StatusMessage from './components/StatusMessage'
 import UserCard from './components/UserCard'
 
 import useGitHubUsers from './hooks/useGitHubUser'
+import TwoColumnLayout from './components/TwoColumnLayout'
+import ProfileCard from './components/ProfileCard'
 
 function App() {
   // these states are inside the hook, being borrowed by the App.tsx
@@ -22,7 +24,14 @@ function App() {
     <div className="flex flex-col min-h-dvh justify-top items-center bg-[#0e1113] pb-4 gap-4">
       <SearchBar query={query} setQuery={setQuery} onSearch={onSearch} inputRef={inputRef} />
       {/* Only shows after a successful fetch */}
-      {(status === "success" || status === "empty") && user && <UserCard user={user} repos={repos} stars={stars} />}
+
+      {(status === "success" || status === "empty") && user && 
+        <TwoColumnLayout
+          left={<UserCard user={user} repos={repos} />}
+          right={<ProfileCard user={user} stars={stars} />} 
+        />
+      }
+
       {status !== "success" && status !== "loading" && status && <StatusMessage status={status} query={searchedQuery} inputRef={inputRef} />}
     </div>
   )
