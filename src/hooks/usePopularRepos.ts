@@ -1,10 +1,10 @@
 import { useState } from "react"
 import { getGitHubPopular, getGitHubFork } from "../api/github"
-import type { GitHubRepo, GitHubStar } from "../api/github"
+import type { GitHubRepo } from "../api/github"
 
 function usePopularRepos() {
     const [popularRepos, setPopularRepos] = useState<GitHubRepo[]>([])
-    const [forkedRepos, setForkedRepos] = useState<GitHubStar[]>([])
+    const [forkedRepos, setForkedRepos] = useState<GitHubRepo[]>([])
 
     async() => {
         try {

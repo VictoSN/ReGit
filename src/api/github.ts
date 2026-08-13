@@ -12,6 +12,7 @@ export interface GitHubUser {
 export interface GitHubRepo {
     owner: GitHubUser
     name: string
+    full_name: string
     description: string | null
     created_at: Date
     html_url: string
@@ -19,13 +20,6 @@ export interface GitHubRepo {
     stargazers_count: number
     forks_count: number
     watchers_count: number
-}
-
-export interface GitHubStar{
-    full_name: string
-    owner: GitHubUser
-    html_url: string
-    stargazers_count: number
 }
 
 export async function getGitHubUser(username: string): Promise<GitHubUser> {
@@ -41,7 +35,7 @@ export async function getGitHubRepos(username: string): Promise<GitHubRepo[]> {
     return await res.json()
 }
 
-export async function getGitHubStars(username: string): Promise<GitHubStar[]> {
+export async function getGitHubStars(username: string): Promise<GitHubRepo[]> {
     const res = await fetch("https://api.github.com/users/" + username + "/starred")
     if (!res.ok) throw new Error("GitHub API error")
     return await res.json()
@@ -53,7 +47,7 @@ export async function getGitHubPopular(): Promise<GitHubRepo[]> {
     return await res.json()
 }
 
-export async function getGitHubFork(): Promise<GitHubStar[]> {
+export async function getGitHubFork(): Promise<GitHubRepo[]> {
     const res = await fetch("https://api.github.com/search/repositories?q=stars:>100000&sort=forks&order=desc&per_page=10")
     if (!res.ok) throw new Error("GitHub API error")
     return await res.json()

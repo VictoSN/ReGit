@@ -1,7 +1,7 @@
-import type { GitHubStar } from "../api/github"
+import type { GitHubRepo } from "../api/github"
 
 interface StarredCardProps {
-    star: GitHubStar
+    star: GitHubRepo
 }
 
 function StarredCard({ star }: StarredCardProps) {

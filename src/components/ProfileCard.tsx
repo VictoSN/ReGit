@@ -1,11 +1,11 @@
-import type { GitHubStar, GitHubUser } from '../api/github'
+import type { GitHubRepo, GitHubUser } from '../api/github'
 import plusIcon from '../assets/plus.svg'
 import FooterLinks from './FooterLinks'
 import StarredList from './StarredList'
 
 interface ProfileCardProps {
     user: GitHubUser
-    stars: GitHubStar[]
+    stars: GitHubRepo[]
 }
 
 function ProfileCard({ user, stars}: ProfileCardProps) {

@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { getGitHubRepos, getGitHubStars, getGitHubUser } from '../api/github'
-import type { GitHubRepo, GitHubStar, GitHubUser } from '../api/github'
+import type { GitHubRepo, GitHubUser } from '../api/github'
 
 // One status per UI screen
 export type Status = "idle" | "loading" | "notFound" | "error" | "success" | "empty"
@@ -8,7 +8,7 @@ export type Status = "idle" | "loading" | "notFound" | "error" | "success" | "em
 function useGitHubUsers() {
     const [user, setUser] = useState<GitHubUser | null>(null)
     const [repos, setRepos] = useState<GitHubRepo[]>([])
-    const [stars, setStars] = useState<GitHubStar[]>([])
+    const [stars, setStars] = useState<GitHubRepo[]>([])
     const [status, setStatus] = useState<Status>("idle")
 
     const search = async(username: string) => {
