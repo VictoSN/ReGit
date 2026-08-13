@@ -1,19 +1,20 @@
 import { useRef, useState } from 'react'
+
+import useGitHubUsers from './hooks/useGitHubUser'
+import usePopularRepos from './hooks/usePopularRepos'
+
 import SearchBar from './components/SearchBar'
 import StatusMessage from './components/StatusMessage'
 import UserCard from './components/UserCard'
-
-import useGitHubUsers from './hooks/useGitHubUser'
 import TwoColumnLayout from './components/TwoColumnLayout'
 import ProfileCard from './components/ProfileCard'
 import RepoList from './components/RepoList'
-import StarredList from './components/StarredList'
-import usePopularRepos from './hooks/usePopularRepos'
+import ForkedList from './components/ForkedList'
 
 function App() {
   // these states are inside the hook, being borrowed by the App.tsx
   const { user, repos, stars, status, search } = useGitHubUsers()
-  const { popularRepos, forkedRepos } = usePopularRepos()
+  const { popularRepos, forkedRepos, failed } = usePopularRepos()
   const [query, setQuery] = useState("") // Raw input from the searchbar
   const [searchedQuery, setSearchQuery] = useState("") // Searched input that the user actually ask for
   const inputRef = useRef<HTMLInputElement>(null) // Used useRef to store address of DOM
@@ -31,10 +32,12 @@ function App() {
 
       {/* Home Page */}
       {(status === "idle") &&
-        <TwoColumnLayout 
-          left={<RepoList repos={popularRepos}/>}
-          right={<StarredList stars={forkedRepos}/>}
-        />
+        (failed ? <p>Couldn't load popular repos. Check your connection or try again in a few minutes</p> : 
+          <TwoColumnLayout 
+            left={<RepoList repos={popularRepos}/>}
+            right={<ForkedList forks={forkedRepos}/>}
+          />
+        )
       }
 
       {/* User Page */}

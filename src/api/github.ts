@@ -44,11 +44,13 @@ export async function getGitHubStars(username: string): Promise<GitHubRepo[]> {
 export async function getGitHubPopular(): Promise<GitHubRepo[]> {
     const res = await fetch("https://api.github.com/search/repositories?q=stars:>100000&sort=stars&order=desc&per_page=100")
     if (!res.ok) throw new Error("GitHub API error")
-    return await res.json()
+    const data: { items: GitHubRepo[] } = await res.json()
+    return data.items
 }
 
 export async function getGitHubFork(): Promise<GitHubRepo[]> {
     const res = await fetch("https://api.github.com/search/repositories?q=stars:>100000&sort=forks&order=desc&per_page=10")
     if (!res.ok) throw new Error("GitHub API error")
-    return await res.json()
+    const data: { items: GitHubRepo[] } = await res.json()
+    return data.items
 }
