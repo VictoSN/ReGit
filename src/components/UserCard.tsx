@@ -8,7 +8,7 @@ interface UserCardProps {
 
 function UserCard({ user, repos }: UserCardProps) {
     return (
-        <div>
+        <div className="flex flex-col gap-5">
             <div className="flex flex-row gap-5 p-4">
                 <img src={user.avatar_url} className="max-w-[64px] rounded-full"/>
                 <div className="flex flex-col">

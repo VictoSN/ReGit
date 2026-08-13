@@ -1,13 +1,18 @@
 import { useState } from "react"
-import { getGitHubPopular, type GitHubRepo } from "../api/github"
+import { getGitHubPopular, getGitHubFork } from "../api/github"
+import type { GitHubRepo, GitHubStar } from "../api/github"
 
 function usePopularRepos() {
-    const [repos, setRepos] = useState<GitHubRepo[]>([])
+    const [popularRepos, setPopularRepos] = useState<GitHubRepo[]>([])
+    const [forkedRepos, setForkedRepos] = useState<GitHubStar[]>([])
 
-    const homepage = async() => {
+    async() => {
         try {
             const repos = await getGitHubPopular()
-            setRepos(repos)
+            setPopularRepos(repos)
+            
+            const forked = await getGitHubFork()
+            setForkedRepos(forked)
         } catch (error) {
             if (error instanceof Error && error.message === "") {
                 
@@ -17,7 +22,7 @@ function usePopularRepos() {
         }
     }
 
-    return { repos, homepage }
+    return { popularRepos, forkedRepos }
 }
 
 export default usePopularRepos

@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { getGitHubRepos, getGitHubStars, getGitHubUser } from '../api/github'
-import type {GitHubRepo, GitHubStar, GitHubUser } from '../api/github'
+import type { GitHubRepo, GitHubStar, GitHubUser } from '../api/github'
 
 // One status per UI screen
 export type Status = "idle" | "loading" | "notFound" | "error" | "success" | "empty"
