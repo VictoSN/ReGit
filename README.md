@@ -9,6 +9,9 @@ A GitHub user lookup app with a Reddit-inspired UI, built with React, TypeScript
 3. Repository list with language color dots and star, watcher and fork counts
 4. Starred repositories displayed in the sidebar
 
+## Try it here!
+[Click me!](https://victosn.github.io/gh-lookup/)
+
 ## How it works
 - All API calls are made directly to the GitHub REST API from the browser, no API key required
 - The API layer in src/api/github.ts is the only file that talks to the network
