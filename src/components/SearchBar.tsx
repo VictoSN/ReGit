@@ -13,7 +13,7 @@ function SearchBar({ query, setQuery, onSearch, onReturnHome, inputRef }: Search
     return (
         <div className="flex sticky top-0 bg-[#0e1113] justify-between items-center w-full text-white px-5 border-solid border-b border-gray-700">
             <button onClick={onReturnHome} className='cursor-pointer'>
-                <h1 className="text-left font-bold text-2xl">GH-Lookup</h1>
+                <h1 className="text-left font-bold text-2xl">ReGit</h1>
             </button>
             <form className="flex py-2 gap-5" onSubmit={(e) => {e.preventDefault(); onSearch() }}>
                 <div className='relative'>

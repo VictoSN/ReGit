@@ -6,7 +6,7 @@ interface StarredCardProps {
 
 function StarredCard({ star }: StarredCardProps) {
     return (
-        <div key={star.full_name} className="flex flex-row items-center justify-between">
+        <div key={star.full_name} className="flex flex-row items-center justify-between px-1 py-2 hover:bg-[#181c1f]">
             <div className="flex flex-row items-center gap-2">
                 <img src={star.owner.avatar_url} className="max-w-[24px] h-[24px] rounded-full"/>
                 <div className="flex flex-col">

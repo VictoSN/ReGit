@@ -25,6 +25,12 @@ function App() {
     search(query) // Actual Get logic
   }
 
+  const openUser = (login: string) => {
+    setQuery(login)
+    setSearchQuery(query)
+    search(login)
+  }
+
   const onReturnHome = () => {
     returnHome()
     setQuery("")
@@ -40,8 +46,8 @@ function App() {
       {(status === "idle") &&
         (failed ? <p className='text-[#8ba2ad] text-sm'>Couldn't load popular repos. Check your connection or try again in a few minutes</p> : 
           <TwoColumnLayout 
-            left={<RecommendedCard repos={popularRepos}/>}
-            right={<PopularCard forks={forkedRepos}/>}
+            left={<RecommendedCard repos={popularRepos} openUser={openUser} />}
+            right={<PopularCard forks={forkedRepos} />}
           />
         )
       }
@@ -49,7 +55,7 @@ function App() {
       {/* User Page */}
       {(status === "success" || status === "empty") && user && 
         <TwoColumnLayout
-          left={<UserCard user={user} repos={repos} />}
+          left={<UserCard user={user} repos={repos} openUser={openUser} />}
           right={<ProfileCard user={user} stars={stars} />} 
         />
       }

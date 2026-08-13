@@ -7,7 +7,7 @@ interface StarredListProps {
 
 function StarredList({ stars }: StarredListProps) {
     return (
-        <div className="flex flex-col gap-4">
+        <div className="flex flex-col">
             
             {
                 stars.map((star) => (<StarredCard star={star} />))
