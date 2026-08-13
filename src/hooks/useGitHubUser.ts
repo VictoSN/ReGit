@@ -3,7 +3,7 @@ import { getGitHubRepos, getGitHubStars, getGitHubUser } from '../api/github'
 import type {GitHubRepo, GitHubStar, GitHubUser } from '../api/github'
 
 // One status per UI screen
-export type Status = "idle" | "loading" | "notFound" | "error" | "success"
+export type Status = "idle" | "loading" | "notFound" | "error" | "success" | "empty"
 
 function useGitHubUsers() {
     const [user, setUser] = useState<GitHubUser | null>(null)
@@ -23,7 +23,7 @@ function useGitHubUsers() {
             const stars = await getGitHubStars(username)
             setStars(stars)
 
-            setStatus("success")
+            setStatus(repos.length === 0 ? "empty" : "success")
         } catch (error) {
             // Ensure its a known error
             if (error instanceof Error && error.message === "User not found") {
