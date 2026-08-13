@@ -34,7 +34,11 @@ function useGitHubUsers() {
         }
     }
 
-    return { user, repos, stars, status, search }
+    const returnHome = () => {
+        setStatus("idle")
+    }
+
+    return { user, repos, stars, status, search, returnHome }
 }
 
 export default useGitHubUsers
