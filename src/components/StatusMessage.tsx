@@ -20,7 +20,7 @@ function StatusMessage({ status, query, inputRef }: StatusMessageProps) {
     }[status]
 
     return  (
-        <div className="flex flex-col items-center text-center pt-20 gap-1 text-white">
+        <div className={`flex flex-col items-center text-center ${status === "empty" ? "" : "pt-20"} gap-1 text-white`}>
             <img src={loitering ? wavingIcon : thinkingIcon} className='max-w-[128px]'/>
             <p className="text-lg font-bold">{text.main}</p> 
             <p className="text-base text-[#8ba2ad]">{text.sub}</p>
