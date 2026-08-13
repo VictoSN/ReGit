@@ -46,3 +46,9 @@ export async function getGitHubStars(username: string): Promise<GitHubStar[]> {
     if (!res.ok) throw new Error("GitHub API error")
     return await res.json()
 }
+
+export async function getGitHubPopular(): Promise<GitHubRepo[]> {
+    const res = await fetch("https://api.github.com/search/repositories?q=stars:>100000&sort=stars&order=desc&per_page=100")
+    if (!res.ok) throw new Error("GitHub API error")
+    return await res.json()
+}
