@@ -8,8 +8,8 @@ import StatusMessage from './components/StatusMessage'
 import UserCard from './components/UserCard'
 import TwoColumnLayout from './components/TwoColumnLayout'
 import ProfileCard from './components/ProfileCard'
-import RepoList from './components/RepoList'
-import ForkedList from './components/ForkedList'
+import PopularCard from './components/PopularCard'
+import RecommendedCard from './components/RecommendedCard'
 
 function App() {
   // these states are inside the hook, being borrowed by the App.tsx
@@ -34,8 +34,8 @@ function App() {
       {(status === "idle") &&
         (failed ? <p>Couldn't load popular repos. Check your connection or try again in a few minutes</p> : 
           <TwoColumnLayout 
-            left={<RepoList repos={popularRepos}/>}
-            right={<ForkedList forks={forkedRepos}/>}
+            left={<RecommendedCard repos={popularRepos}/>}
+            right={<PopularCard forks={forkedRepos}/>}
           />
         )
       }
