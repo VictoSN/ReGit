@@ -1,12 +1,11 @@
 import { useState } from 'react'
-import { getGitHubCommitCount, getGitHubCommits, getGitHubContentDetails, getGitHubContents, getGitHubRepo } from '../api/github'
-import type { GitHubRepo, GitHubRepoCommit, GitHubRepoContent, GitHubRepoContentDetails } from '../api/github'
+import { getGitHubCommitCount, getGitHubCommits, getGitHubContents, getGitHubRepo } from '../api/github'
+import type { GitHubRepo, GitHubRepoCommit, GitHubRepoContent } from '../api/github'
 
 function useGitHubRepo() {
     const [specificRepo, setSpecificRepo] = useState<GitHubRepo>()
     const [repoCommits, setRepoCommits] = useState<GitHubRepoCommit[]>()
     const [repoContents, setRepoContents] = useState<GitHubRepoContent[]>()
-    const [repoContentDetails, setRepoContentDetails] = useState<GitHubRepoContentDetails[]>()
     const [repoCount, setRepoCount] = useState(0)
     const [failedRepo, setFailed] = useState(false)
 
@@ -21,15 +20,6 @@ function useGitHubRepo() {
             const contents = await getGitHubContents(owner, repo)
             setRepoContents(contents)
 
-            // insert all of the paths from the contents
-            const contentDetails = await Promise.all(
-                contents.map(async c => {
-                    const commits = await getGitHubContentDetails(owner, repo, c.path)
-                    return commits[0]
-                })
-            )
-            setRepoContentDetails(contentDetails)
-
             const count = await getGitHubCommitCount(owner, repo)
             setRepoCount(count)
 
@@ -39,7 +29,7 @@ function useGitHubRepo() {
         }
     }
 
-    return { specificRepo, setSpecificRepo, repoCommits, repoContents, repoContentDetails, repoCount, failedRepo, searchRepo }
+    return { specificRepo, setSpecificRepo, repoCommits, repoContents, repoCount, failedRepo, searchRepo }
 }
 
 export default useGitHubRepo

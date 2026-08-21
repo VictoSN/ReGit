@@ -16,7 +16,7 @@ import RepoPage from './components/RepoPage'
 function App() {
   // these states are inside the hook, being borrowed by the App.tsx
   const { user, repos, stars, status, searchUser, returnHome } = useGitHubUsers()
-  const { specificRepo, setSpecificRepo, repoCommits, repoContents, repoContentDetails, repoCount, failedRepo, searchRepo } = useGitHubRepo()
+  const { specificRepo, setSpecificRepo, repoCommits, repoContents, repoCount, failedRepo, searchRepo } = useGitHubRepo()
   const { popularRepos, forkedRepos, failedPopular } = usePopularRepos()
 
   const [query, setQuery] = useState("") // Raw input from the searchbar
@@ -73,9 +73,9 @@ function App() {
       }
 
       {/* Repo Page */}
-      {specificRepo && (!failedRepo) && specificRepo && repoCommits && repoContents && repoContentDetails && user && 
+      {specificRepo && (!failedRepo) && specificRepo && repoCommits && repoContents && user && 
         <TwoColumnLayout 
-          left={<RepoPage repo={specificRepo} repoCommits={repoCommits} repoContents={repoContents} repoContentDetails={repoContentDetails} repoCount={repoCount} openUser={openUser} />}
+          left={<RepoPage repo={specificRepo} repoCommits={repoCommits} repoContents={repoContents} repoCount={repoCount} openUser={openUser} />}
           right={<ProfileCard user={user} stars={stars} openUser={openUser} openRepo={openRepo}  />}
         />
       }

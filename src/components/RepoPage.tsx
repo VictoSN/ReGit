@@ -1,17 +1,16 @@
 import { useEffect, useState } from "react"
-import { getGitHubUser, type GitHubRepo, type GitHubRepoCommit, type GitHubRepoContent, type GitHubRepoContentDetails, type GitHubUser } from "../api/github"
+import { getGitHubUser, type GitHubRepo, type GitHubRepoCommit, type GitHubRepoContent, type GitHubUser } from "../api/github"
 import StatusCard from "./StatusCard"
 
 interface RepoPageProps {
     repo: GitHubRepo
     repoCommits: GitHubRepoCommit[]
     repoContents: GitHubRepoContent[]
-    repoContentDetails: GitHubRepoContentDetails[]
     repoCount: number
     openUser: (login: string) => void
 }
 
-function RepoPage({ repo, repoCommits, repoContents, repoContentDetails, repoCount, openUser }: RepoPageProps) {
+function RepoPage({ repo, repoCommits, repoContents, repoCount, openUser }: RepoPageProps) {
     const [ownerDetails, setOwnerDetails] = useState<GitHubUser | null>(null)
 
     useEffect(() => {
@@ -19,6 +18,9 @@ function RepoPage({ repo, repoCommits, repoContents, repoContentDetails, repoCou
     }, [repo.owner.login])
 
     if(!ownerDetails) return null
+
+    const truncate = (text: string | null | undefined, length: number) =>
+        text && text.length > length ? text.slice(0, length) + "..." : text;
 
     return (
         <div className="flex flex-col gap-2">
@@ -37,16 +39,16 @@ function RepoPage({ repo, repoCommits, repoContents, repoContentDetails, repoCou
             </div>
 
             <a href={repo.html_url} target="_blank" rel="noopener noreferrer" className="text-2xl font-semibold mb-4">{repo.full_name}</a>
-            <p className="text-xs font-semibold text-[#8ba2ad] mb-4">{repo.description}</p>
+            <p className="text-sm font-semibold text-[#8ba2ad] mb-4">{repo.description}</p>
 
-            <div className="rounded-sm border-solid border-1 border-gray-800 text-[#8ba2ad]">
+            <div className="rounded-sm border-solid border-1 border-gray-600 text-[#8ba2ad]">
                 <div className="flex flex-row items-center justify-between bg-[#151b23] px-2 py-4">
                     <div className="flex flex-row text-sm gap-2">
                         <img src={repoCommits[0].author.avatar_url} className="max-w-[20px] rounded-full"/>
                         <button onClick={() => openUser(repoCommits[0].author.login)} className="cursor-pointer">
                             <p className="text-start font-semibold text-white">{repoCommits[0].author.login}</p>
                         </button>
-                        <a href={repoCommits[0].html_url} target="_blank" rel="noopener noreferrer" className="hover:underline">{repoCommits[0].commit.message}</a>
+                        <a href={repoCommits[0].html_url} target="_blank" rel="noopener noreferrer" className="hover:underline">{truncate(repoCommits[0].commit.message, 40)}</a>
                     </div>
 
                     <div className="flex flex-row gap-4">
@@ -63,10 +65,22 @@ function RepoPage({ repo, repoCommits, repoContents, repoContentDetails, repoCou
                             <p className="text-white">{repoCount} commits</p>
                         </div>
                     </div>
-
-
                 </div>
 
+                {repoContents.map((content) => (<div key={content.path} className="flex flex-row items-center py-2 border-solid border-t border-gray-600">
+                    <div className="flex flex-row items-center gap-2 px-2 text-sm">
+                        {content.type === "dir" ? (
+                            <svg className="w-4 h-4 fill-current" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                <path d="M1.75 1A1.75 1.75 0 0 0 0 2.75v10.5C0 14.216.784 15 1.75 15h12.5A1.75 1.75 0 0 0 16 13.25v-8.5A1.75 1.75 0 0 0 14.25 3H7.5a.25.25 0 0 1-.2-.1l-.9-1.2C6.07 1.26 5.55 1 5 1H1.75Z" />
+                            </svg>
+                            ) : (
+                            <svg className="w-4 h-4 fill-current" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                <path d="M2 1.75C2 .784 2.784 0 3.75 0h6.586c.464 0 .909.184 1.237.513l2.914 2.914c.329.328.513.773.513 1.237v9.586A1.75 1.75 0 0 1 13.25 16h-9.5A1.75 1.75 0 0 1 2 14.25Zm1.75-.25a.25.25 0 0 0-.25.25v12.5c0 .138.112.25.25.25h9.5a.25.25 0 0 0 .25-.25V6h-2.75A1.75 1.75 0 0 1 9 4.25V1.5Zm6.75.062V4.25c0 .138.112.25.25.25h2.688l-.011-.013-2.914-2.914-.013-.011Z" />
+                            </svg>
+                        )}
+                        <a href={content.html_url} target="_blank" rel="noopener noreferrer" className="cursor-pointer hover:text-[#7286c6] hover:underline text-white">{content.path}</a>
+                    </div>
+                </div>))}
             </div>
 
             <StatusCard repo={repo} />

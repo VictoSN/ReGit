@@ -42,20 +42,9 @@ export interface GitHubRepoCommit {
 }
 
 export interface GitHubRepoContent {
-    name: string
     path: string
     html_url: string
     type: string
-}
-
-export interface GitHubRepoContentDetails {
-    commit: {
-        author: {
-            date: string
-        }
-        message: string
-    }
-    html_url: string
 }
 
 export async function getGitHubUser(owner: string): Promise<GitHubUser> {
@@ -118,13 +107,5 @@ export async function getGitHubCommits(owner: string, repo: string): Promise<Git
 export async function getGitHubContents(owner: string, repo: string): Promise<GitHubRepoContent[]> {
     const res = await fetch("https://api.github.com/repos/" + owner + "/" + repo  + "/contents")
     if (!res.ok) throw new Error("GitHub API error")
-    const data: GitHubRepoContent[] = await res.json()
-    return data
-}
-
-export async function getGitHubContentDetails(owner: string, repo: string, path: string): Promise<GitHubRepoContentDetails[]> {
-    const res = await fetch("https://api.github.com/repos/" + owner + "/" + repo  + "/commits?path=" + path + "&per_page=1")
-    if (!res.ok) throw new Error("GitHub API error")
-    const data: GitHubRepoContentDetails[] = await res.json()
-    return data
+    return await res.json()
 }
