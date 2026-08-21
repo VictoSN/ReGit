@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { getGitHubPopular, getGitHubFork } from "../api/github"
+import { getGitHubPopular, getGitHubForks } from "../api/github"
 import type { GitHubRepo } from "../api/github"
 
 function usePopularRepos() {
@@ -10,7 +10,7 @@ function usePopularRepos() {
     useEffect(() => {
         async function load() {
             try {
-                const [repos, forked] = await Promise.all([getGitHubPopular(), getGitHubFork()])
+                const [repos, forked] = await Promise.all([getGitHubPopular(), getGitHubForks()])
                 setPopularRepos(repos)
                 setForkedRepos(forked)
             } catch (error) {
