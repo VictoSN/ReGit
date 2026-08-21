@@ -6,9 +6,10 @@ import StarredList from './StarredList'
 interface ProfileCardProps {
     user: GitHubUser
     stars: GitHubRepo[]
+    openRepo: (url: string) => void
 }
 
-function ProfileCard({ user, stars}: ProfileCardProps) {
+function ProfileCard({ user, stars, openRepo}: ProfileCardProps) {
     return (
         <div className="flex flex-col gap-4 h-fit">
             <div className='flex flex-col gap-4 p-4 bg-black rounded-2xl h-fit'>
@@ -36,7 +37,7 @@ function ProfileCard({ user, stars}: ProfileCardProps) {
                 {stars.length > 0 && (
                     <div className="flex flex-col pt-4 border-solid border-t border-gray-800 gap-4">
                         <p className='text-xs font-semibold text-[#8ba2ad]'>STARRED REPOSITORIES</p>
-                        <StarredList stars={stars} />
+                        <StarredList stars={stars} openRepo={openRepo} />
                     </div>
                 )}
             </div>

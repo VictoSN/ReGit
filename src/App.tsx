@@ -64,7 +64,7 @@ function App() {
       {(status === "success" || status === "empty") && user && 
         <TwoColumnLayout
           left={<UserCard user={user} repos={repos} openUser={openUser} openRepo={openRepo} />}
-          right={<ProfileCard user={user} stars={stars} />} 
+          right={<ProfileCard user={user} stars={stars} openRepo={openRepo} />} 
         />
       }
 
@@ -72,7 +72,7 @@ function App() {
       {(!failedRepo) && specificRepo && user && 
         <TwoColumnLayout 
           left={<RepoPage specificRepo={specificRepo} />}
-          right={<ProfileCard user={user} stars={stars} />}
+          right={<ProfileCard user={user} stars={stars} openRepo={openRepo}  />}
         />
       }
 
