@@ -25,11 +25,13 @@ function App() {
 
   const onSearch = () => {
     if (!query.trim()) return // ensure to only search when there is a valid query
+    setSpecificRepo(undefined)
     setSearchQuery(query) // Used for Status Message text
     searchUser(query) // Actual Get logic
   }
 
   const openUser = (login: string) => {
+    setSpecificRepo(undefined)
     setQuery(login)
     setSearchQuery(query)
     searchUser(login)
