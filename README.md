@@ -8,6 +8,8 @@ A GitHub user lookup app with a Reddit-inspired UI, built with React, TypeScript
 2. Profile card showing avatar, name, bio, stats and join date
 3. Repository list with language color dots and star, watcher and fork counts
 4. Starred repositories displayed in the sidebar
+5. View popular and highly-forked repositories
+6. Render repository README files using Markdown
 
 ## Try it here!
 [Click me!](https://victosn.github.io/reGit/)
@@ -17,6 +19,7 @@ A GitHub user lookup app with a Reddit-inspired UI, built with React, TypeScript
 - The API layer in src/api/github.ts is the only file that talks to the network
 - A custom hook fetches the user, their repos and their starred repos, then reports the result through a status value
 - Language dots use GitHub's official colors, with gray as the fallback for unknown languages
+- Repository README files are retrieved from GitHub and rendered using react-markdown with GitHub-Flavored Markdown support through remark-gfm.
 
 ## Screenshots
 ### Default Interface
@@ -24,6 +27,9 @@ A GitHub user lookup app with a Reddit-inspired UI, built with React, TypeScript
 
 ### User Example
 ![User](public/screenshots/User.png)
+
+### Repo Example
+![Repo](public/screenshots/Repo.png)
 
 ### User Has No Repo
 ![No Repo](public/screenshots/No_Repo.png)
