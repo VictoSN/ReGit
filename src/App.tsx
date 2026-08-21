@@ -75,7 +75,7 @@ function App() {
       {/* Repo Page */}
       {specificRepo && (!failedRepo) && specificRepo && user && 
         <TwoColumnLayout 
-          left={<RepoPage specificRepo={specificRepo} />}
+          left={<RepoPage repo={specificRepo} openUser={openUser} />}
           right={<ProfileCard user={user} stars={stars} openUser={openUser} openRepo={openRepo}  />}
         />
       }
