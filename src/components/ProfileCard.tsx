@@ -6,14 +6,17 @@ import StarredList from './StarredList'
 interface ProfileCardProps {
     user: GitHubUser
     stars: GitHubRepo[]
+    openUser: (login: string) => void
     openRepo: (url: string) => void
 }
 
-function ProfileCard({ user, stars, openRepo}: ProfileCardProps) {
+function ProfileCard({ user, stars, openUser, openRepo}: ProfileCardProps) {
     return (
         <div className="flex flex-col gap-4 h-fit">
             <div className='flex flex-col gap-4 p-4 bg-black rounded-2xl h-fit'>
-                <p className="font-bold text-base">{user.login}</p>
+                <button onClick={() => (openUser(user.login))} className='cursor-pointer'>
+                    <p className="font-bold text-base text-start">{user.login}</p>
+                </button>
                 <div className="relative">
                     <img src={plusIcon} className="max-w-[16px] absolute left-2 top-1/2 -translate-y-1/2"/>
                     <a href={user.html_url} target="_blank" rel="noopener noreferrer" className="w-fit bg-white pl-8 pr-3 py-1 text-black rounded-3xl">Follow</a>
