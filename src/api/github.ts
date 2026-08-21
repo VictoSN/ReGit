@@ -67,14 +67,17 @@ export async function getGitHubStars(owner: string): Promise<GitHubRepo[]> {
 }
 
 export async function getGitHubPopular(): Promise<GitHubRepo[]> {
-    const res = await fetch("https://api.github.com/search/repositories?q=stars:>100000&sort=stars&order=desc&per_page=100")
+    const page = Math.floor(Math.random() * 10) + 1
+    const res = await fetch("https://api.github.com/search/repositories?q=stars:>10000&sort=stars&order=desc&per_page=100&page=" + page)
     if (!res.ok) throw new Error("GitHub API error")
     const data: { items: GitHubRepo[] } = await res.json()
     return data.items
 }
 
 export async function getGitHubForks(): Promise<GitHubRepo[]> {
-    const res = await fetch("https://api.github.com/search/repositories?q=stars:>100000&sort=forks&order=desc&per_page=10")
+    const day = Math.floor(Date.now() / 86400000)
+    const page = (day % 10) + 1
+    const res = await fetch("https://api.github.com/search/repositories?q=forks:>1000&sort=forks&order=desc&per_page=10&page=" + page)
     if (!res.ok) throw new Error("GitHub API error")
     const data: { items: GitHubRepo[] } = await res.json()
     return data.items
