@@ -1,0 +1,7 @@
+.scrollbar-hover {
+    scrollbar-width: none;
+}
+
+.scrollbar-hover:hover {
+    scrollbar-width: thin;
+}
