@@ -11,7 +11,7 @@ function useGitHubUsers() {
     const [stars, setStars] = useState<GitHubRepo[]>([])
     const [status, setStatus] = useState<Status>("idle")
 
-    const search = async(username: string) => {
+    const searchUser = async(username: string) => {
         setStatus("loading")
         try {
             const user = await getGitHubUser(username)
@@ -38,7 +38,7 @@ function useGitHubUsers() {
         setStatus("idle")
     }
 
-    return { user, repos, stars, status, search, returnHome }
+    return { user, repos, stars, status, searchUser, returnHome }
 }
 
 export default useGitHubUsers

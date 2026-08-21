@@ -5,7 +5,7 @@ import type { GitHubRepo } from "../api/github"
 function usePopularRepos() {
     const [popularRepos, setPopularRepos] = useState<GitHubRepo[]>([])
     const [forkedRepos, setForkedRepos] = useState<GitHubRepo[]>([])
-    const [failed, setFailed] = useState(false)
+    const [failedPopular, setFailed] = useState(false)
 
     useEffect(() => {
         async function load() {
@@ -20,7 +20,7 @@ function usePopularRepos() {
         load()
     }, [])
 
-    return { popularRepos, forkedRepos, failed }
+    return { popularRepos, forkedRepos, failedPopular }
 }
 
 export default usePopularRepos
