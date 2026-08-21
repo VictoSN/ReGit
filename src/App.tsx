@@ -73,9 +73,9 @@ function App() {
       }
 
       {/* Repo Page */}
-      {specificRepo && (!failedRepo) && specificRepo && user && 
+      {specificRepo && (!failedRepo) && specificRepo && repoCommits && repoContents && repoContentDetails && user && 
         <TwoColumnLayout 
-          left={<RepoPage repo={specificRepo} openUser={openUser} />}
+          left={<RepoPage repo={specificRepo} repoCommits={repoCommits} repoContents={repoContents} repoContentDetails={repoContentDetails} openUser={openUser} />}
           right={<ProfileCard user={user} stars={stars} openUser={openUser} openRepo={openRepo}  />}
         />
       }

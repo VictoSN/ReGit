@@ -1,13 +1,16 @@
 import { useEffect, useState } from "react"
-import { getGitHubUser, type GitHubRepo, type GitHubUser } from "../api/github"
+import { getGitHubUser, type GitHubRepo, type GitHubRepoCommit, type GitHubRepoContent, type GitHubRepoContentDetails, type GitHubUser } from "../api/github"
 import StatusCard from "./StatusCard"
 
 interface RepoPageProps {
     repo: GitHubRepo
+    repoCommits: GitHubRepoCommit[]
+    repoContents: GitHubRepoContent[]
+    repoContentDetails: GitHubRepoContentDetails[]
     openUser: (login: string) => void
 }
 
-function RepoPage({ repo, openUser }: RepoPageProps) {
+function RepoPage({ repo, repoCommits, repoContents, repoContentDetails, openUser }: RepoPageProps) {
     const [ownerDetails, setOwnerDetails] = useState<GitHubUser | null>(null)
 
     useEffect(() => {
