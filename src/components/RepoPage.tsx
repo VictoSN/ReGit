@@ -1,5 +1,7 @@
+import ReactMarkdown from "react-markdown"
+import remarkGfm from "remark-gfm"
 import { useEffect, useState } from "react"
-import { getGitHubUser, type GitHubRepo, type GitHubRepoCommit, type GitHubRepoContent, type GitHubUser } from "../api/github"
+import { getGitHubReadme, getGitHubUser, type GitHubRepo, type GitHubRepoCommit, type GitHubRepoContent, type GitHubUser } from "../api/github"
 import StatusCard from "./StatusCard"
 
 interface RepoPageProps {
@@ -12,11 +14,16 @@ interface RepoPageProps {
 
 function RepoPage({ repo, repoCommits, repoContents, repoCount, openUser }: RepoPageProps) {
     const [ownerDetails, setOwnerDetails] = useState<GitHubUser | null>(null)
+    const [readme, setReadme] = useState<string | null>(null)
 
     useEffect(() => {
         getGitHubUser(repo.owner.login). then(setOwnerDetails)
     }, [repo.owner.login])
 
+    useEffect(() => {
+        getGitHubReadme(repo.owner.login, repo.name).then(setReadme).catch(() => setReadme(null))
+    }, [repo.owner.login, repo.name])
+    
     if(!ownerDetails) return null
 
     const truncate = (text: string | null | undefined, length: number) =>
@@ -82,8 +89,21 @@ function RepoPage({ repo, repoCommits, repoContents, repoCount, openUser }: Repo
                     </div>
                 </div>))}
             </div>
-
             <StatusCard repo={repo} />
+
+            <div className="flex flex-col mt-4 rounded-sm border-solid border-1 border-gray-600 text-[#8ba2ad] p-2">
+                <div className="flex flex-row gap-2 items-center border-solid border-b-2 border-[#f78166] w-fit">
+                    <svg className="w-4 h-4 fill-current" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                        <path d="M0 1.75A.75.75 0 0 1 .75 1h4.253c1.227 0 2.317.59 3 1.501A3.743 3.743 0 0 1 11.006 1h4.245a.75.75 0 0 1 .75.75v10.5a.75.75 0 0 1-.75.75h-4.507a2.25 2.25 0 0 0-1.591.659l-.622.621a.75.75 0 0 1-1.06 0l-.622-.621A2.25 2.25 0 0 0 5.258 13H.75a.75.75 0 0 1-.75-.75Zm7.251 10.324.004-5.073-.002-2.253A2.25 2.25 0 0 0 5.003 2.5H1.5v9h3.757a3.75 3.75 0 0 1 1.994.574ZM8.755 4.75l-.004 7.322a3.752 3.752 0 0 1 1.992-.572H14.5v-9h-3.495a2.25 2.25 0 0 0-2.25 2.25Z" />
+                    </svg>
+                    <p className="text-white font-semibold">README</p>
+                </div>
+                {readme && (
+                    <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                        {readme}
+                    </ReactMarkdown>
+                )}
+            </div>
         </div>
     )
 }

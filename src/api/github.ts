@@ -109,3 +109,10 @@ export async function getGitHubContents(owner: string, repo: string): Promise<Gi
     if (!res.ok) throw new Error("GitHub API error")
     return await res.json()
 }
+
+export async function getGitHubReadme(owner: string, repo: string): Promise<string> {
+    const res = await fetch("https://api.github.com/repos/" + owner + "/" + repo + "/readme")
+    if (!res.ok) throw new Error("GitHub API error")
+    const data = await res.json()
+    return atob(data.content)
+}
