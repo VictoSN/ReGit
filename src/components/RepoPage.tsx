@@ -8,7 +8,8 @@ interface RepoPageProps {
 function RepoPage({ specificRepo }: RepoPageProps) {
     return (
         <div>
-            <p>hello</p>
+            testing first
+            <p>{specificRepo.full_name}</p>
         </div>
     )
 }

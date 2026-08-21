@@ -16,7 +16,7 @@ import RepoPage from './components/RepoPage'
 function App() {
   // these states are inside the hook, being borrowed by the App.tsx
   const { user, repos, stars, status, searchUser, returnHome } = useGitHubUsers()
-  const { specificRepo, failedRepo, searchRepo } = useGitHubRepo()
+  const { specificRepo, setSpecificRepo, failedRepo, searchRepo } = useGitHubRepo()
   const { popularRepos, forkedRepos, failedPopular } = usePopularRepos()
 
   const [query, setQuery] = useState("") // Raw input from the searchbar
@@ -35,12 +35,14 @@ function App() {
     searchUser(login)
   }
 
-  const openRepo = (url: string) => {
-    searchRepo(url)
+  const openRepo = async (url: string) => {
+    const repo = await searchRepo(url)
+    if (repo) searchUser(repo.owner.login)
   }
 
   const onReturnHome = () => {
     returnHome()
+    setSpecificRepo(undefined)
     setQuery("")
     setSearchQuery("")
   }
@@ -61,7 +63,7 @@ function App() {
       }
 
       {/* User Page */}
-      {(status === "success" || status === "empty") && user && 
+      {!specificRepo && (status === "success" || status === "empty") && user && 
         <TwoColumnLayout
           left={<UserCard user={user} repos={repos} openUser={openUser} openRepo={openRepo} />}
           right={<ProfileCard user={user} stars={stars} openRepo={openRepo} />} 

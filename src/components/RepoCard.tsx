@@ -46,8 +46,8 @@ function RepoCard({ repo, openUser, openRepo }: RepoCardProps) {
                     <p className="text-[#8ba2ad] text-xs">{new Date(repo.created_at).toLocaleDateString()}</p>
                 </div>
 
-                <button onClick={() => openRepo(repo.owner.html_url)} className="cursor-pointer flex flex-row">
-                    <p className="justify-left text-lg font-semibold">{repo.name}</p>
+                <button onClick={() => openRepo(repo.html_url)} className="cursor-pointer">
+                    <p className="justify-left text-lg font-semibold text-start">{repo.name}</p>
                 </button>
                 <p className="text-[#8ba2ad] text-sm">{repo.description}</p>
 
