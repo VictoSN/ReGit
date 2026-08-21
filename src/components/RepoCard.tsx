@@ -3,6 +3,7 @@ import type { GitHubRepo } from "../api/github"
 interface RepoCardProps {
     repo: GitHubRepo
     openUser: (login: string) => void
+    openRepo: (url: string) => void
 }
 
 const languageColors: Record<string, string> = {
@@ -28,7 +29,7 @@ const languageColors: Record<string, string> = {
     "Jupyter Notebook": "#DA5B0B",
 }
 
-function RepoCard({ repo, openUser }: RepoCardProps) {
+function RepoCard({ repo, openUser, openRepo }: RepoCardProps) {
     function getLanguageColor(lang: string): string {
         return languageColors[lang] ?? "#8b949e"
     }
@@ -45,7 +46,9 @@ function RepoCard({ repo, openUser }: RepoCardProps) {
                     <p className="text-[#8ba2ad] text-xs">{new Date(repo.created_at).toLocaleDateString()}</p>
                 </div>
 
-                <a href={repo.html_url} target="_blank" rel="noopener noreferrer" className="text-lg font-semibold ">{repo.name}</a>
+                <button onClick={() => openRepo(repo.owner.html_url)} className="cursor-pointer flex flex-row">
+                    <p className="justify-left text-lg font-semibold">{repo.name}</p>
+                </button>
                 <p className="text-[#8ba2ad] text-sm">{repo.description}</p>
 
                 <div className="flex flex-row mt-2 items-center gap-3 text-xs">

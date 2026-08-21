@@ -1,6 +1,7 @@
 import { useRef, useState } from 'react'
 
 import useGitHubUsers from './hooks/useGitHubUser'
+import useGitHubRepo from './hooks/useGitHubRepo'
 import usePopularRepos from './hooks/usePopularRepos'
 
 import SearchBar from './components/SearchBar'
@@ -10,11 +11,14 @@ import TwoColumnLayout from './components/TwoColumnLayout'
 import ProfileCard from './components/ProfileCard'
 import PopularCard from './components/PopularCard'
 import RecommendedCard from './components/RecommendedCard'
+import RepoPage from './components/RepoPage'
 
 function App() {
   // these states are inside the hook, being borrowed by the App.tsx
-  const { user, repos, stars, status, search, returnHome } = useGitHubUsers()
-  const { popularRepos, forkedRepos, failed } = usePopularRepos()
+  const { user, repos, stars, status, searchUser, returnHome } = useGitHubUsers()
+  const { specificRepo, failedRepo, searchRepo } = useGitHubRepo()
+  const { popularRepos, forkedRepos, failedPopular } = usePopularRepos()
+
   const [query, setQuery] = useState("") // Raw input from the searchbar
   const [searchedQuery, setSearchQuery] = useState("") // Searched input that the user actually ask for
   const inputRef = useRef<HTMLInputElement>(null) // Used useRef to store address of DOM
@@ -22,13 +26,17 @@ function App() {
   const onSearch = () => {
     if (!query.trim()) return // ensure to only search when there is a valid query
     setSearchQuery(query) // Used for Status Message text
-    search(query) // Actual Get logic
+    searchUser(query) // Actual Get logic
   }
 
   const openUser = (login: string) => {
     setQuery(login)
     setSearchQuery(query)
-    search(login)
+    searchUser(login)
+  }
+
+  const openRepo = (url: string) => {
+    searchRepo(url)
   }
 
   const onReturnHome = () => {
@@ -44,9 +52,9 @@ function App() {
 
       {/* Home Page */}
       {(status === "idle") &&
-        (failed ? <StatusMessage status={status} query={searchedQuery} inputRef={inputRef} /> : 
+        (failedPopular ? <StatusMessage status={status} query={searchedQuery} inputRef={inputRef} /> : 
           <TwoColumnLayout 
-            left={<RecommendedCard repos={popularRepos} openUser={openUser} />}
+            left={<RecommendedCard repos={popularRepos} openUser={openUser} openRepo={openRepo} />}
             right={<PopularCard forks={forkedRepos} />}
           />
         )
@@ -55,8 +63,16 @@ function App() {
       {/* User Page */}
       {(status === "success" || status === "empty") && user && 
         <TwoColumnLayout
-          left={<UserCard user={user} repos={repos} openUser={openUser} />}
+          left={<UserCard user={user} repos={repos} openUser={openUser} openRepo={openRepo} />}
           right={<ProfileCard user={user} stars={stars} />} 
+        />
+      }
+
+      {/* Repo Page */}
+      {(!failedRepo) && specificRepo && user && 
+        <TwoColumnLayout 
+          left={<RepoPage specificRepo={specificRepo} />}
+          right={<ProfileCard user={user} stars={stars} />}
         />
       }
 
