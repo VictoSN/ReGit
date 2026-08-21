@@ -54,3 +54,16 @@ export async function getGitHubFork(): Promise<GitHubRepo[]> {
     const data: { items: GitHubRepo[] } = await res.json()
     return data.items
 }
+
+function parseGitHubUrl(url: string) {
+    const [owner, repo] = new URL(url).pathname.split("/").filter(Boolean)
+    return { owner, repo }
+}
+
+export async function getGitHubRepo(url: string): Promise<GitHubRepo> {
+    const { owner, repo } = parseGitHubUrl(url)
+    const res = await fetch("https://api.github.com/repos/" + owner + "/" + repo)
+    if (res.status === 404) throw new Error("User not found")
+    if (!res.ok) throw new Error("GitHub API error")
+    return await res.json()
+}
