@@ -55,7 +55,7 @@ function App() {
         (failedPopular ? <StatusMessage status={status} query={searchedQuery} inputRef={inputRef} /> : 
           <TwoColumnLayout 
             left={<RecommendedCard repos={popularRepos} openUser={openUser} openRepo={openRepo} />}
-            right={<PopularCard forks={forkedRepos} />}
+            right={<PopularCard forks={forkedRepos} openRepo={openRepo} />}
           />
         )
       }
