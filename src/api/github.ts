@@ -110,20 +110,19 @@ export async function getGitHubCommitCount(owner: string, repo: string) : Promis
 export async function getGitHubCommits(owner: string, repo: string): Promise<GitHubRepoCommit[]> {
     const res = await fetch("https://api.github.com/repos/" + owner + "/" + repo  + "/commits")
     if (!res.ok) throw new Error("GitHub API error")
-    const data: { items: GitHubRepoCommit[] } = await res.json()
-    return data.items
+    return await res.json() // return direct array
 }
 
 export async function getGitHubContents(owner: string, repo: string): Promise<GitHubRepoContent[]> {
     const res = await fetch("https://api.github.com/repos/" + owner + "/" + repo  + "/contents")
     if (!res.ok) throw new Error("GitHub API error")
-    const data: { items: GitHubRepoContent[] } = await res.json()
-    return data.items
+    const data: GitHubRepoContent[] = await res.json()
+    return data
 }
 
 export async function getGitHubContentDetails(owner: string, repo: string, path: string): Promise<GitHubRepoContentDetails[]> {
     const res = await fetch("https://api.github.com/repos/" + owner + "/" + repo  + "/commits?path=" + path + "&per_page=1")
     if (!res.ok) throw new Error("GitHub API error")
-    const data: { items: GitHubRepoContentDetails[] } = await res.json()
-    return data.items
+    const data: GitHubRepoContentDetails[] = await res.json()
+    return data
 }

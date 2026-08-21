@@ -16,7 +16,7 @@ import RepoPage from './components/RepoPage'
 function App() {
   // these states are inside the hook, being borrowed by the App.tsx
   const { user, repos, stars, status, searchUser, returnHome } = useGitHubUsers()
-  const { specificRepo, setSpecificRepo, failedRepo, searchRepo } = useGitHubRepo()
+  const { specificRepo, setSpecificRepo, repoCommits, repoContents, repoContentDetails, failedRepo, searchRepo } = useGitHubRepo()
   const { popularRepos, forkedRepos, failedPopular } = usePopularRepos()
 
   const [query, setQuery] = useState("") // Raw input from the searchbar
@@ -37,8 +37,8 @@ function App() {
     searchUser(login)
   }
 
-  const openRepo = async (url: string) => {
-    const repo = await searchRepo(url)
+  const openRepo = async (owner: string, repoPath: string) => {
+    const repo = await searchRepo(owner, repoPath)
     if (repo) searchUser(repo.owner.login)
   }
 

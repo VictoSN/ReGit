@@ -2,7 +2,7 @@ import type { GitHubRepo } from "../api/github"
 
 interface StarredCardProps {
     star: GitHubRepo
-    openRepo: (url: string) => void
+    openRepo: (owner: string, repo: string) => void
 }
 
 function StarredCard({ star, openRepo }: StarredCardProps) {
@@ -11,7 +11,7 @@ function StarredCard({ star, openRepo }: StarredCardProps) {
             <div className="flex flex-row items-center gap-2">
                 <img src={star.owner.avatar_url} className="max-w-[24px] h-[24px] rounded-full"/>
                 <div className="flex flex-col">
-                    <button onClick={() => openRepo(star.html_url)} className="cursor-pointer">
+                    <button onClick={() => openRepo(star.owner.login, star.name)} className="cursor-pointer">
                         <p className="text-sm text-left">{star.full_name}</p>
                     </button>
                     <p className="text-xs text-[#8ba2ad]">{star.stargazers_count} stars</p>

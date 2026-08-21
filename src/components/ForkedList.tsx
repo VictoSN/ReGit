@@ -3,7 +3,7 @@ import ForkedCard from "./ForkedCard"
 
 interface ForkedListRepos {
     forks: GitHubRepo[]
-    openRepo: (url: string) => void
+    openRepo: (owner: string, repo: string) => void
 }
 
 function ForkedList({ forks, openRepo }: ForkedListRepos) {

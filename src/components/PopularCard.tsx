@@ -4,7 +4,7 @@ import ForkedList from './ForkedList'
 
 interface PopularCardProps {
     forks: GitHubRepo[]
-    openRepo: (url: string) => void
+    openRepo: (owner: string, repo: string) => void
 }
 
 function PopularCard({ forks, openRepo }: PopularCardProps) {

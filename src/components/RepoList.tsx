@@ -4,7 +4,7 @@ import RepoCard from "./RepoCard"
 interface RepoListProps {
     repos: GitHubRepo[]
     openUser: (login: string) => void
-    openRepo: (url: string) => void
+    openRepo: (owner: string, repo: string) => void
 }
 
 function RepoList({ repos, openUser, openRepo }: RepoListProps) {

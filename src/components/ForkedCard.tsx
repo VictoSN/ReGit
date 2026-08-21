@@ -2,7 +2,7 @@ import type { GitHubRepo } from "../api/github"
 
 interface ForkedCardProps {
     fork: GitHubRepo
-    openRepo: (url: string) => void
+    openRepo: (owner: string, repo: string) => void
 }
 
 function ForkedCard({ fork, openRepo }: ForkedCardProps ) {
@@ -11,7 +11,7 @@ function ForkedCard({ fork, openRepo }: ForkedCardProps ) {
             <div className="flex flex-row items-center gap-2">
                 <img src={fork.owner.avatar_url} className="max-w-[24px] h-[24px] rounded-full"/>
                 <div className="flex flex-col">
-                    <button onClick={() => openRepo(fork.html_url)} className="cursor-pointer">
+                    <button onClick={() => openRepo(fork.owner.login, fork.name)} className="cursor-pointer">
                         <p className="text-sm text-left">{fork.full_name}</p>
                     </button>
                     <p className="text-xs text-[#8ba2ad]">{fork.forks_count} forks</p>

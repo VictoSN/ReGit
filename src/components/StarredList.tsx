@@ -3,7 +3,7 @@ import StarredCard from "./StarredCard"
 
 interface StarredListProps {
     stars: GitHubRepo[]
-    openRepo: (url: string) => void
+    openRepo: (owner: string, repo: string) => void
 }
 
 function StarredList({ stars, openRepo }: StarredListProps) {

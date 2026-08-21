@@ -4,7 +4,7 @@ import RepoList from './RepoList'
 interface RecommendedCardProps {
     repos: GitHubRepo[]
     openUser: (login: string) => void
-    openRepo: (url: string) => void
+    openRepo: (owner: string, repo: string) => void
 }
 
 function RecommendedCard({ repos, openUser, openRepo }: RecommendedCardProps) {

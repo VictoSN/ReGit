@@ -9,9 +9,9 @@ function useGitHubRepo() {
     const [repoContentDetails, setRepoContentDetails] = useState<GitHubRepoContentDetails[]>()
     const [failedRepo, setFailed] = useState(false)
 
-    const searchRepo = async(url: string, owner: string, repo: string, path: string) => {
+    const searchRepo = async(owner: string, repo: string) => {
         try {
-            const data = await getGitHubRepo(url)
+            const data = await getGitHubRepo(owner, repo)
             setSpecificRepo(data)
 
             const commits = await getGitHubCommits(owner, repo)
@@ -20,7 +20,13 @@ function useGitHubRepo() {
             const contents = await getGitHubContents(owner, repo)
             setRepoContents(contents)
 
-            const contentDetails = await getGitHubContentDetails(owner, repo, path)
+            // insert all of the paths from the contents
+            const contentDetails = await Promise.all(
+                contents.map(async c => {
+                    const commits = await getGitHubContentDetails(owner, repo, c.path)
+                    return commits[0]
+                })
+            )
             setRepoContentDetails(contentDetails)
 
             return data

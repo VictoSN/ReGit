@@ -7,7 +7,7 @@ interface ProfileCardProps {
     user: GitHubUser
     stars: GitHubRepo[]
     openUser: (login: string) => void
-    openRepo: (url: string) => void
+    openRepo: (owner: string, repo: string) => void
 }
 
 function ProfileCard({ user, stars, openUser, openRepo}: ProfileCardProps) {

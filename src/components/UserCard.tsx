@@ -5,7 +5,7 @@ interface UserCardProps {
     user: GitHubUser
     repos: GitHubRepo[]
     openUser: (login: string) => void
-    openRepo: (url: string) => void
+    openRepo: (owner: string, repo: string) => void
 }
 
 function UserCard({ user, repos, openUser, openRepo }: UserCardProps) {

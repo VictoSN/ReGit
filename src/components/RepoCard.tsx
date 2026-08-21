@@ -4,7 +4,7 @@ import StatusCard from "./StatusCard"
 interface RepoCardProps {
     repo: GitHubRepo
     openUser: (login: string) => void
-    openRepo: (url: string) => void
+    openRepo: (owner: string, repo: string) => void
 }
 
 function RepoCard({ repo, openUser, openRepo }: RepoCardProps) {
@@ -20,7 +20,7 @@ function RepoCard({ repo, openUser, openRepo }: RepoCardProps) {
                     <p className="text-[#8ba2ad] text-xs">{new Date(repo.created_at).toLocaleDateString()}</p>
                 </div>
 
-                <button onClick={() => openRepo(repo.html_url)} className="cursor-pointer">
+                <button onClick={() => openRepo(repo.owner.login, repo.name)} className="cursor-pointer">
                     <p className="justify-left text-lg font-semibold text-start">{repo.name}</p>
                 </button>
                 <p className="text-[#8ba2ad] text-sm">{repo.description}</p>
