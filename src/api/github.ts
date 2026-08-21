@@ -9,10 +9,6 @@ export interface GitHubUser {
     created_at: Date
 }
 
-export interface GitHubLicense {
-    spdx_id: string
-}
-
 export interface GitHubRepo {
     owner: GitHubUser
     name: string
@@ -24,7 +20,40 @@ export interface GitHubRepo {
     stargazers_count: number
     forks_count: number
     watchers_count: number
-    license: GitHubLicense | null
+    license: {
+        spdx_id: string
+    } | null
+    contents_url: string | null
+}
+
+export interface GitHubRepoCommit {
+    sha: string
+    commit: {
+        message: string
+        date: Date
+    }
+    author: {
+        login: string
+        avatar_url: string
+    }
+    html_url: string
+}
+
+export interface GitHubRepoContent {
+    name: string
+    path: string
+    html_url: string
+    type: string
+}
+
+export interface GitHubRepoContentDetails {
+    commit: {
+        author: {
+            date: string
+        }
+        message: string
+    }
+    html_url: string
 }
 
 export async function getGitHubUser(username: string): Promise<GitHubUser> {
