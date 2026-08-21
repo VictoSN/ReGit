@@ -8,9 +8,7 @@ interface ForkedListRepos {
 function ForkedList({ forks }: ForkedListRepos) {
     return (
         <div className="flex flex-col">
-            {
-                forks.map((fork) => (<ForkedCard fork={fork} />))
-            }
+            {forks.map((fork) => (<ForkedCard key={fork.full_name} fork={fork} />))}
         </div>
     )
 }
