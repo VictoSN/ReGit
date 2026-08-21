@@ -30,7 +30,9 @@ export interface GitHubRepoCommit {
     sha: string
     commit: {
         message: string
-        date: Date
+        author: {
+            date: Date
+        }
     }
     author: {
         login: string

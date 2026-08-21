@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { getGitHubCommits, getGitHubContentDetails, getGitHubContents, getGitHubRepo } from '../api/github'
+import { getGitHubCommitCount, getGitHubCommits, getGitHubContentDetails, getGitHubContents, getGitHubRepo } from '../api/github'
 import type { GitHubRepo, GitHubRepoCommit, GitHubRepoContent, GitHubRepoContentDetails } from '../api/github'
 
 function useGitHubRepo() {
@@ -7,6 +7,7 @@ function useGitHubRepo() {
     const [repoCommits, setRepoCommits] = useState<GitHubRepoCommit[]>()
     const [repoContents, setRepoContents] = useState<GitHubRepoContent[]>()
     const [repoContentDetails, setRepoContentDetails] = useState<GitHubRepoContentDetails[]>()
+    const [repoCount, setRepoCount] = useState(0)
     const [failedRepo, setFailed] = useState(false)
 
     const searchRepo = async(owner: string, repo: string) => {
@@ -29,13 +30,16 @@ function useGitHubRepo() {
             )
             setRepoContentDetails(contentDetails)
 
+            const count = await getGitHubCommitCount(owner, repo)
+            setRepoCount(count)
+
             return data
         } catch (error) {
             setFailed(true)
         }
     }
 
-    return { specificRepo, setSpecificRepo, repoCommits, repoContents, repoContentDetails, failedRepo, searchRepo }
+    return { specificRepo, setSpecificRepo, repoCommits, repoContents, repoContentDetails, repoCount, failedRepo, searchRepo }
 }
 
 export default useGitHubRepo
